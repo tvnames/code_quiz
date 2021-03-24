@@ -1,14 +1,45 @@
 
 var pos = 0, quiz, status, question, choice, choices, chA, chB, chC, chD, correct = 0;
-var button = btn;
-const btn = document.querySelector("button");
-const txt = document.querySelector("p");
-btn.addEventListener("click", updateBtn);
+var button = document.querySelector("#button");
+var timerEl = document.querySelector("#timer");
+var secondsLeft = 90;
+var counter = document.querySelector("#countdown");
+var name = playerName;
+var score = playerScore;
 
-function updateBtn() {
-  if (btn.textContent === "Start Quiz") {
-   getElementById("questions");
+
+
+
+document.addEventListener("onclick", countdown)
+
+  function countdown() {
+    var timeLeft = 65;
+  
+  
+    var timeInterval = setInterval(function () {
+    
+      if (timeLeft > 0) {
+        
+        timerEl.textContent = timeLeft + ' seconds remaining';
+        
+        timeLeft--;
+      } 
+      
+      else if (timeLeft < 1) {
+        
+        timerEl.textContent = timeLeft + ' second remaining';
+        timeLeft--;
+     
+        timerEl.textContent = '';
+        clearInterval(timeInterval);
+       
+      }
+    }, 1000);
   }
+  
+  countdown();
+
+
 
 
 var questions = [
@@ -64,14 +95,15 @@ function getQuestion(){
   quiz = get("quiz");
   if(pos >= questions.length){
     quiz.innerHTML = "<h2>You got "+correct+" of "+questions.length+" questions correct</h2>";
-    get("status").innerHTML = "Quiz completed";
-    // resets the variable to allow users to restart the test
-    pos = 0;
-    correct = 0;
-    // stops rest of getQuestion function running when test is completed
-    return false;
+    function storePlayer() {
+
+      window.localStorage.setItem("player names" ),
+      window.localStorage.setItem("player score" );
+      
+      }
+  
   }
-  get("status").innerHTML = "Question "+(pos+1)+" of "+questions.length;
+
   
   question = questions[pos].question;
   chA = questions[pos].a;
